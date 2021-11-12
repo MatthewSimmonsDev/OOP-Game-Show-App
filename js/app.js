@@ -8,18 +8,21 @@ const btnReset = document.querySelector('#btn__reset');
 const keyboard = document.querySelector('#qwerty');
 const keys = keyboard.querySelectorAll('.key');
 
+// Start game button starts the game
 btnReset.addEventListener('click', () => {
   game = new Game();
   game.startGame();
 
 })
 
+// event handler for manually clicking
 keyboard.addEventListener('click', (e) => {
   if(e.target.className === 'key'){
     game.handleInteraction(e.target.innerHTML);
   }
 })
 
+// event handler for keyboard
 document.addEventListener('keydown',(e) => {
   if (document.getElementById('overlay').style.display === '') {
       e.preventDefault();

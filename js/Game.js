@@ -6,7 +6,7 @@ class Game{
   constructor(){
     this.missed = 0;
     this.phrases = this.createPhrases();
-    this.activePhrase = this.getRandomPhrase();
+    this.activePhrase = null;
   }
 
   // resets the game state and starts the game by randomly picking a new phrase
@@ -37,7 +37,7 @@ class Game{
   getRandomPhrase(){
     const phrases = this.phrases;
     const randomPhrases = Math.floor(Math.random() * phrases.length);
-    return new Phrase(phrases[randomPhrases]);
+    this.activePhrase = new Phrase(phrases[randomPhrases]);
   }
 
   // modifies classes of keyboard keys to show if they are correct or incorrect
@@ -46,7 +46,6 @@ class Game{
     const keys = keyboard.querySelectorAll('.key');
 
     if(this.activePhrase.checkLetter(button)){
-      
       for (let i = 0; i < keys.length; i++){
         if (keys[i].innerHTML === button){
           keys[i].classList.add('chosen');
@@ -54,7 +53,6 @@ class Game{
       }
 
       this.activePhrase.showMatchedLetter(button);
-      // this.checkForWin();
       if (this.checkForWin()){
         this.gameOver(true)
       }
